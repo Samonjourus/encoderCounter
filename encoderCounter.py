@@ -7,16 +7,16 @@ clk2 = 20
 dt2 = 26
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(clk1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(dt1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(clk2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(dt2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 counter1 = 0
-clkLastState1 = GPIO.input(clk)
+clkLastState1 = GPIO.input(clk1)
 
 counter2 = 0
-clkLastState2 = GPIO.input(clk)
+clkLastState2 = GPIO.input(clk2)
 
 try:
 
@@ -42,3 +42,4 @@ try:
                 clkLastState2 = clkState2
                 sleep(0.01)
 finally:
+        GPIO.cleanup()
