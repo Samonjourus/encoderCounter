@@ -25,6 +25,7 @@ try:
                 dtState1 = GPIO.input(dt1)
                 clkState2 = GPIO.input(clk2)
                 dtState2 = GPIO.input(dt2)
+		print str(clkState2)+ " "+ str(dtState2)
                 if clkState1 != clkLastState1:
                         if dtState1 != clkState1:
                                 counter1 += 1
