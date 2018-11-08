@@ -1,6 +1,8 @@
 from RPi import GPIO
 from time import sleep
 
+pulses=0
+
 clk2 = 20
 dt2 = 26
 
@@ -20,8 +22,10 @@ try:
         if dtState2:
             direction="forward"
             print "forward"
+            pulses=pulses+1
         if clkState2:
             direction="backward"
+            pulses=pulses+1
             print "backward"
 	#print str(clkState2) + " " + str(dtState2)
         if clkState2 != clkLastState2:
