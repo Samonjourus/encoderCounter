@@ -9,6 +9,7 @@ GPIO.setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 counter = 0
+counter1 = 0
 clkLastState = GPIO.input(clk)
 
 direction = ""
@@ -22,14 +23,21 @@ try:
             if clkState:
 		print "up"
                 if dtState:
-                    direction = "forward"
-                    print direction
+			if direction != "forward":
+                    		direction = "forward"
+				counter = counter+1
+                    		print direction + " " + str(counter)
+			else:
+				counter = counter+1
+				print direction + " " + str(counter)
                 else:
-                    direction = "backwards"
-                    print direction
-
-        print str(clkState) + " " + str(dtState)
-
+			if direction != "backward":
+				counter1 = counter1+1
+                		direction = "backward"
+                		print direction + " " + str(counter1)
+			else:
+				counter1 = counter1+1
+				print direction + " " + str(counter)
         clkLastState = clkState
         sleep(0.01)
 	#print counter
