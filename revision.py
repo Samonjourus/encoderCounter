@@ -4,11 +4,15 @@ from time import sleep
 clk = 26
 dt = 20
 
+def my_callback(i):
+	print "x"
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.add_event_detect(26, GPIO.RISING, callback=my_callback, bouncetime=1)
 
-forwardCcounter = 0
+forwardCounter = 0
 backwardCounter = 0
 pulseCounter = 0;
 clkLastState = GPIO.input(clk)
@@ -19,26 +23,27 @@ try:
     while True:
         clkState = GPIO.input(clk)
         dtState = GPIO.input(dt)
-        if clkState && (clkState != clkLastState):
+        if clkState and (clkState != clkLastState):
             pulseCounter = pulseCounter + 1
+            print "total pulses:  " + str(pulseCounter)
             if dtState:
                 if direction != "forward":
                     direction = "forward"
                     forwardCounter = forwardCounter+1
-                    print direction + " " + str(forwardCounter)
+                    print direction + " pulses: " + str(forwardCounter)
                 else:
-                    counter = counter+1
-                    print direction + " " + str(counter)
+                    forwardCounter = forwardCounter+1
+                    print direction + " pulses: " + str(forwardCounter)
             else:
                 if direction != "backward":
-                    counter1 = counter1+1
+                    backwardCounter = backwardCounter+1
                     direction = "backward"
-                    print direction + " " + str(counter1)
+                    print direction + " pulses: " + str(backwardCounter)
                 else:
-                    counter1 = counter1+1
-                    print direction + " " + str(counter)
+                    backwardCounter = backwardCounter+1
+                    print direction + " pulses: " + str(backwardCounter)
         clkLastState = clkState
-        sleep(0.001)
+        #sleep(0.001)
 #print counter
 finally:
-GPIO.cleanup()
+	GPIO.cleanup()
