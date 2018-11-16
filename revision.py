@@ -4,8 +4,13 @@ from time import sleep
 clk = 26
 dt = 20
 
+global ecount
+ecount =0
+
 def my_callback(i):
-	print "x"
+	global ecount
+	ecount = ecount+1
+	print str(ecount)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
